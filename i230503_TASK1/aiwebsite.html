@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Set the document title to the name of your application -->
+    <title>Lovable App</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
+    <!-- TODO: Update og:title to match your application name -->
+    <meta property="og:title" content="Lovable App" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Scenery Gallery - Nature's Finest Landscapes</title>
+    <meta name="description" content="A peaceful journey through nature's most breathtaking landscapes. Discover the beauty that inspires and the serenity that heals." />
+    <link rel="icon" href="/public/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#hero" class="nav-logo">Scenery Gallery</a>
+        
+        <div class="nav-links" id="nav-links">
+          <a href="#hero" class="nav-link">Home</a>
+          <a href="#gallery" class="nav-link">Gallery</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+          <span class="hamburger"></span>
+        </button>
+      </div>
+    </nav>
+    <main>
+      <!-- Hero Section -->
+      <section id="hero" class="hero">
+        <div class="hero-bg">
+          <img src="/src/assets/gallery/mountain-lake.jpg" alt="Scenic mountain lake at golden hour" />
+          <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+          <p class="hero-subtitle animate-fade-in">Welcome to</p>
+          <h1 class="hero-title animate-fade-in-up">Scenery Gallery</h1>
+          <div class="section-divider animate-fade-in-delay-1"></div>
+          <p class="hero-description animate-fade-in-delay-2">
+            A peaceful journey through nature's most breathtaking landscapes.
+            Discover the beauty that inspires and the serenity that heals.
+          </p>
+        </div>
+        
+        <div class="scroll-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-dot"></div>
+          </div>
+        </div>
+      </section>
+      <!-- Gallery Section -->
+      <section id="gallery" class="gallery">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-label">Collection</p>
+            <h2 class="section-title">Featured Artworks</h2>
+            <div class="section-divider"></div>
+          </div>
+          <div class="gallery-grid">
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="mountain-lake.jpg" alt="Alpine Serenity" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Alpine Serenity</h3>
+                <p>Snow-capped peaks embrace a pristine lake at golden hour. Nature's mirror reflects the majesty of untouched wilderness.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="misty-forest.jpg" alt="Whispers of Dawn" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Whispers of Dawn</h3>
+                <p>Morning light pierces through ancient forest canopy. Each sunbeam tells a story of patience and eternal renewal.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="lavender-field.jpg" alt="Provence Dreams" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Provence Dreams</h3>
+                <p>Endless rows of lavender dance beneath a golden sunset. The fragrant breeze carries whispers of French countryside magic.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="coastal-cliffs.jpg" alt="Edge of Wonder" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Edge of Wonder</h3>
+                <p>Dramatic cliffs stand guard over tumultuous seas. Where earth meets ocean, raw power creates timeless beauty.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="japanese-garden.jpg" alt="Autumn Reflection" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Autumn Reflection</h3>
+                <p>Crimson maples frame a tranquil Japanese garden pond. Perfect stillness captures the essence of zen contemplation.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="tuscan-hills.jpg" alt="Golden Tuscany" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Golden Tuscany</h3>
+                <p>Rolling hills draped in amber light stretch to the horizon. Cypress sentinels mark the path through timeless Italian beauty.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="aurora-lake.jpg" alt="Northern Lights" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Northern Lights</h3>
+                <p>Dancing auroras paint the Arctic sky in ethereal greens. Frozen wilderness becomes a canvas for celestial art.</p>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <div class="gallery-image">
+                <img src="tropical-waterfall.jpg" alt="Hidden Paradise" />
+              </div>
+              <div class="gallery-overlay">
+                <h3>Hidden Paradise</h3>
+                <p>Crystal waters cascade into an emerald pool below. Tropical rainforest guards this secret sanctuary of peace.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- About Section -->
+      <section id="about" class="about">
+        <div class="container">
+          <div class="about-content">
+            <p class="section-label">Our Story</p>
+            <h2 class="section-title">About the Gallery</h2>
+            <div class="section-divider"></div>
+            
+            <div class="about-text">
+              <p>
+                The Scenery Gallery was born from a deep appreciation for the
+                natural world and its infinite capacity to inspire wonder. Each
+                image in our collection has been carefully selected to evoke the
+                tranquility and majesty found in nature's most breathtaking
+                moments.
+              </p>
+              <p>
+                From misty mountain peaks to serene coastal waters, from ancient
+                forests to blooming meadows, our gallery celebrates the diverse
+                beauty of landscapes across the globe. We believe that nature's
+                artistry speaks to something profound within us all.
+              </p>
+              <p class="quote">
+                "In every walk with nature, one receives far more than he seeks."
+              </p>
+              <p class="quote-author">— John Muir</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>Scenery Gallery</h3>
+            <p>
+              Celebrating the beauty of nature through fine art landscape
+              photography. A peaceful escape for the soul.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="#hero">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+          </div>
+          <div class="footer-contact">
+            <h4>Get in Touch</h4>
+            <div class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span>hello@scenerygallery.art</span>
+            </div>
+            <div class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Virtual Gallery • Worldwide</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-divider"></div>
+        <p class="footer-copyright">
+          © 2026 Scenery Gallery. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script>
+      // Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navLinks = document.getElementById('nav-links');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+      });
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        });
+      });
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
