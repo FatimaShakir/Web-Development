@@ -1,0 +1,66 @@
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: xx-large;   
+  text-align: center;              
+  color: darkslategrey;                
+}
+
+body {
+  background-color: lightblue;     
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333333;
+  display: flex;
+}
+
+ul li a {
+  display: block;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  background-color: #2c5f20;
+}
+
+ul .right {
+  margin-left: auto;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 20px;
+}
+
+.item {
+  text-align: center;
+}
+
+.gallery img {
+  width: 70%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.item p {
+  margin-top: 8px;
+  font-size: 20px;
+  color: #333;
+  line-height: 1.4;
+}
+
+
+
+p {
+  font-family: Arial, sans-serif;
+  font-size: large;
+  text-align: center;
+  color: #333333;
+}
