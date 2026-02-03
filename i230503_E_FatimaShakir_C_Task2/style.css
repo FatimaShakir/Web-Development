@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f6f8;
+    padding-top: 40px;
+}
+
+.outer {
+    width: 400px;
+    height: 350px;
+    border: 3px solid #333;
+    margin: 30px auto;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.inner {
+    width: 100px;
+    height: 100px;
+    background-color: #3db6cb;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    border-radius: 6px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background-color: #42cac4;
+    color: rgb(10, 9, 9);
+}
