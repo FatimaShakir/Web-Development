@@ -5,29 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moving Box</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
     <h2>Moving box</h2>
-
+    <p class="stats">
+        Score: <span id="score">0</span> |
+        Time: <span id="time">20</span>
+    </p>
     <div class="outer">
         <div class="inner" id="innerBox"></div>
     </div>
 
-    <button onclick="startMove()">Start</button>
+    <button id="startBtn">Start</button>
+    <script src="script.js"></script>
 
-    <script>
-        function startMove() {
-            const innerBox = document.getElementById("innerBox");
-            const outer = document.querySelector(".outer");
-            const maxX = outer.clientWidth - innerBox.clientWidth;
-            const maxY = outer.clientHeight - innerBox.clientHeight;            
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-            innerBox.style.left = randomX + "px";
-            innerBox.style.top = randomY + "px";
-        }
-    </script>
 
 </body>
 </html>
