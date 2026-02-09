@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archery Game - Moving Target</title>
+    <link rel="stylesheet" href="ai.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Archery Challenge</h1>
+            <p class="subtitle">Shoot the moving target before time runs out!</p>
+        </header>
+        
+        <div class="game-info">
+            <div class="score-container">
+                <div class="info-label">Score</div>
+                <div class="info-value" id="score">0</div>
+            </div>
+            
+            <div class="timer-container">
+                <div class="info-label">Time Left</div>
+                <div class="info-value" id="timer">60</div>
+            </div>
+            
+            <div class="difficulty-container">
+                <div class="info-label">Difficulty</div>
+                <div class="info-value" id="difficulty">Easy</div>
+            </div>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+            <div class="bow">
+                <div class="bow-body"></div>
+                <div class="bow-curve"></div>
+            </div>
+            
+            <div class="arrow" id="arrow">
+                <div class="arrow-head"></div>
+            </div>
+            
+            <div class="target" id="target">
+                <div class="target-ring ring-1"></div>
+                <div class="target-ring ring-2"></div>
+                <div class="target-ring ring-3"></div>
+                <div class="target-ring ring-4"></div>
+                <div class="target-center"></div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="shootBtn" class="control-btn">
+                <span class="btn-icon">🏹</span> Shoot Arrow (Click or Space)
+            </button>
+            
+            <button id="restartBtn" class="control-btn">
+                <span class="btn-icon">🔄</span> Restart Game
+            </button>
+            
+            <div class="instructions">
+                <h3>How to Play:</h3>
+                <ul>
+                    <li>Click the "Shoot Arrow" button or press SPACE to shoot</li>
+                    <li>Hit the moving target to score points</li>
+                    <li>Target moves faster as your score increases</li>
+                    <li>Game ends when time runs out</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="game-over" id="gameOver">
+            <h2>Game Over!</h2>
+            <p>Your final score: <span id="finalScore">0</span></p>
+            <button id="playAgainBtn">Play Again</button>
+        </div>
+    </div>
+    
+    <script src="ai.js"></script>
+</body>
+</html>

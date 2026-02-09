@@ -22,14 +22,13 @@ body {
 }
 
 .inner {
-    width: 120px;
-    height: 120px;
+    width: 70px;
+    height: 70px;
     background-color: #3db6cb;
     position: absolute;
-    transition: all 0.5s ease;
-    top: 75px;
-    left: 0;
     border-radius: 6px;
+    right: 20px;
+    left: auto;
 }
 
 button {
@@ -40,4 +39,21 @@ button {
     border-radius: 6px;
     background-color: #42cac4;
     color: rgb(10, 9, 9);
+}
+
+.shooter {
+    width: 20px;
+    height: 120px;
+    background-color: black;
+    position: absolute;
+    left: 20px;
+    top: 130px;
+}
+
+.bullet {
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
 }
