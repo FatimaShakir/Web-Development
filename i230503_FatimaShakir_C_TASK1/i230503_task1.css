@@ -9,6 +9,13 @@ body {
   background-color: lightblue;     
 }
 
+.material_icons {
+  vertical-align: middle;
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -56,11 +63,28 @@ ul .right {
   line-height: 1.4;
 }
 
-
-
 p {
   font-family: Arial, sans-serif;
   font-size: large;
   text-align: center;
   color: #333333;
+}
+
+@media (max-width: 768px) 
+{
+  ul {
+    flex-direction: column;
+  }
+  ul .right {
+    margin-left: 0;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+  .gallery img {
+    width: 90%;
+  }
+  h1 {
+    font-size: large;
+  }
 }

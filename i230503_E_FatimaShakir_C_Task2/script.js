@@ -1,23 +1,20 @@
-// ===== DOM ELEMENTS =====
+//DOM ELEMENTS
 const target = document.getElementById("innerBox");
 const outer = document.querySelector(".outer");
 const startBtn = document.getElementById("startBtn");
 const scoreDisplay = document.getElementById("score");
 const timeDisplay = document.getElementById("time");
 
-// ===== GAME STATE =====
 let score = 0;
 let timeLeft = 30;
 let gameRunning = false;
 let timerInterval;
 let speed = 1.5;
 
-// Smooth movement variables
 let direction = 1;
 let currentY = 0;
 let animationFrame;
 
-// ===== SMOOTH TARGET MOVEMENT =====
 const smoothMoveTarget = () => {
 
     if (!gameRunning) return;
@@ -36,7 +33,6 @@ const smoothMoveTarget = () => {
     animationFrame = requestAnimationFrame(smoothMoveTarget);
 };
 
-// ===== UPDATE SCORE =====
 const updateScore = () => {
 
     score++;
@@ -44,7 +40,7 @@ const updateScore = () => {
     increaseDifficulty();
 };
 
-// ===== TIMER =====
+
 const startTimer = () => {
 
     timerInterval = setInterval(() => {
@@ -57,15 +53,13 @@ const startTimer = () => {
     }, 1000);
 };
 
-// ===== DIFFICULTY =====
 const increaseDifficulty = () => {
 
-    if (score % 3 === 0 && speed < 6) {
+    if (score % 2 === 0 && speed < 6) {
         speed += 0.5;
     }
 };
 
-// ===== START GAME =====
 const startGame = () => {
 
     if (gameRunning) return;
@@ -84,7 +78,6 @@ const startGame = () => {
     startTimer();
 };
 
-// ===== END GAME =====
 const endGame = () => {
 
     gameRunning = false;
@@ -94,7 +87,6 @@ const endGame = () => {
     alert("Game Over! Score: " + score);
 };
 
-// ===== SHOOT BULLET =====
 outer.addEventListener("click", () => {
 
     if (!gameRunning) return;
@@ -136,5 +128,4 @@ outer.addEventListener("click", () => {
     }, 20);
 });
 
-// ===== START BUTTON =====
 startBtn.addEventListener("click", startGame);
