@@ -1,0 +1,35 @@
+import mongoose from "mongoose";
+
+const ActivityLogSchema = new mongoose.Schema(
+  {
+    leadId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Lead",
+      required: true,
+    },
+    action: {
+      type: String,
+      required: true,
+    },
+    performedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    performedByName: {
+      type: String,
+      required: true,
+    },
+    details: {
+      type: String,
+      default: "",
+    },
+  },
+  { timestamps: true }
+);
+
+const ActivityLog =
+  mongoose.models.ActivityLog ||
+  mongoose.model("ActivityLog", ActivityLogSchema);
+
+export default ActivityLog;
