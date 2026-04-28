@@ -1,38 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useLeads } from "@/hooks/useLeads";
 import LeadTable from "@/components/leads/LeadTable";
 import LeadForm from "@/components/leads/LeadForm";
 import { Plus, Search } from "lucide-react";
 
 export default function AdminLeadsPage() {
-  const [leads, setLeads] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [statusFilter, setStatusFilter] = useState("");
   const [scoreFilter, setScoreFilter] = useState("");
   const [search, setSearch] = useState("");
 
-  const fetchLeads = async () => {
-    setLoading(true);
-    const params = new URLSearchParams();
-    if (statusFilter) params.append("status", statusFilter);
-    if (scoreFilter) params.append("score", scoreFilter);
-
-    const res = await fetch(`/api/leads?${params}`);
-    const data = await res.json();
-    setLeads(data.leads || []);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchLeads();
-  }, [statusFilter, scoreFilter]);
+  const { leads, loading, refetch } = useLeads({
+    status: statusFilter,
+    score: scoreFilter,
+  });
 
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this lead?")) return;
     await fetch(`/api/leads/${id}`, { method: "DELETE" });
-    fetchLeads();
+    refetch();
   };
 
   const filteredLeads = leads.filter(
@@ -43,7 +31,6 @@ export default function AdminLeadsPage() {
 
   return (
     <div>
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold text-white">All Leads</h2>
@@ -58,7 +45,6 @@ export default function AdminLeadsPage() {
         </button>
       </div>
 
-      {/* Filters */}
       <div className="flex gap-3 mb-6 flex-wrap">
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -92,7 +78,6 @@ export default function AdminLeadsPage() {
         </select>
       </div>
 
-      {/* Table */}
       {loading ? (
         <div className="text-center py-20 text-gray-500">Loading leads...</div>
       ) : (
@@ -104,11 +89,10 @@ export default function AdminLeadsPage() {
         />
       )}
 
-      {/* Lead Form Modal */}
       {showForm && (
         <LeadForm
           onClose={() => setShowForm(false)}
-          onSuccess={() => fetchLeads()}
+          onSuccess={() => refetch()}
         />
       )}
     </div>

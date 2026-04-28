@@ -4,9 +4,11 @@ import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import Lead from "@/models/Lead";
 import ActivityLog from "@/models/ActivityLog";
+import Notification from "@/models/Notification";
+import User from "@/models/User";
 import { calculateScore } from "@/lib/scoring";
+import { sendNewLeadEmail } from "@/lib/email";
 
-// GET all leads
 export async function GET(request) {
   try {
     const session = await getServerSession(authOptions);
@@ -22,7 +24,6 @@ export async function GET(request) {
 
     let query = {};
 
-    // Agents only see their assigned leads
     if (session.user.role === "agent") {
       query.assignedTo = session.user.id;
     }
@@ -37,14 +38,10 @@ export async function GET(request) {
     return NextResponse.json({ leads }, { status: 200 });
   } catch (error) {
     console.error("Get leads error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
-// POST create lead
 export async function POST(request) {
   try {
     const session = await getServerSession(authOptions);
@@ -55,7 +52,6 @@ export async function POST(request) {
     const body = await request.json();
     const { name, email, phone, propertyInterest, budget, status, notes, source } = body;
 
-    // Validation
     if (!name || !email || !phone || !propertyInterest || !budget) {
       return NextResponse.json(
         { error: "Name, email, phone, property interest, and budget are required" },
@@ -65,7 +61,6 @@ export async function POST(request) {
 
     await connectDB();
 
-    // Auto calculate score
     const score = calculateScore(Number(budget));
 
     const lead = await Lead.create({
@@ -89,12 +84,28 @@ export async function POST(request) {
       details: `Lead created with ${score} priority`,
     });
 
+    // Create notification for admins
+    await Notification.create({
+      title: "New Lead Created",
+      message: `${lead.name} — ${score} Priority — PKR ${Number(budget).toLocaleString()}`,
+      type: "lead_created",
+      forRole: "admin",
+    });
+
+    // Send email to admin
+    try {
+      const admins = await User.find({ role: "admin" }).select("email");
+      for (const admin of admins) {
+        await sendNewLeadEmail(lead, admin.email);
+      }
+    } catch (emailError) {
+      console.error("Email send error:", emailError);
+      // Don't fail the request if email fails
+    }
+
     return NextResponse.json({ lead }, { status: 201 });
   } catch (error) {
     console.error("Create lead error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -4,6 +4,9 @@ import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import Lead from "@/models/Lead";
 import ActivityLog from "@/models/ActivityLog";
+import Notification from "@/models/Notification";
+import User from "@/models/User";
+import { sendLeadAssignedEmail } from "@/lib/email";
 
 export async function POST(request, { params }) {
   try {
@@ -28,6 +31,7 @@ export async function POST(request, { params }) {
 
     if (!lead) return NextResponse.json({ error: "Lead not found" }, { status: 404 });
 
+    // Log activity
     await ActivityLog.create({
       leadId: id,
       action: "Lead Assigned",
@@ -35,6 +39,24 @@ export async function POST(request, { params }) {
       performedByName: session.user.name,
       details: `Lead assigned to ${lead.assignedTo.name}`,
     });
+
+    // Create notification for the assigned agent
+    await Notification.create({
+      title: "New Lead Assigned",
+      message: `You have been assigned lead: ${lead.name}`,
+      type: "lead_assigned",
+      forUser: agentId,
+    });
+
+    // Send email to agent
+    try {
+      const agent = await User.findById(agentId).select("email name");
+      if (agent) {
+        await sendLeadAssignedEmail(lead, agent.email, agent.name);
+      }
+    } catch (emailError) {
+      console.error("Email send error:", emailError);
+    }
 
     return NextResponse.json({ lead }, { status: 200 });
   } catch (error) {
