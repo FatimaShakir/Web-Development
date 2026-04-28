@@ -7,6 +7,7 @@ import ActivityLog from "@/models/ActivityLog";
 
 export async function POST(request, { params }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session || session.user.role !== "admin") {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -20,15 +21,15 @@ export async function POST(request, { params }) {
     await connectDB();
 
     const lead = await Lead.findByIdAndUpdate(
-      params.id,
+      id,
       { assignedTo: agentId },
-      { new: true }
+      { returnDocument: "after" }
     ).populate("assignedTo", "name email");
 
     if (!lead) return NextResponse.json({ error: "Lead not found" }, { status: 404 });
 
     await ActivityLog.create({
-      leadId: params.id,
+      leadId: id,
       action: "Lead Assigned",
       performedBy: session.user.id,
       performedByName: session.user.name,
@@ -37,6 +38,7 @@ export async function POST(request, { params }) {
 
     return NextResponse.json({ lead }, { status: 200 });
   } catch (error) {
+    console.error("Assign error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
