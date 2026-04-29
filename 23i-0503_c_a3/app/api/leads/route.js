@@ -8,7 +8,10 @@ import Notification from "@/models/Notification";
 import User from "@/models/User";
 import { calculateScore } from "@/lib/scoring";
 import { sendNewLeadEmail } from "@/lib/email";
+import { validateLeadData } from "@/middleware/validationMiddleware";
+import { rateLimit } from "@/middleware/rateLimitMiddleware";
 
+// GET all leads
 export async function GET(request) {
   try {
     const session = await getServerSession(authOptions);
@@ -42,6 +45,7 @@ export async function GET(request) {
   }
 }
 
+// POST create lead
 export async function POST(request) {
   try {
     const session = await getServerSession(authOptions);
@@ -49,15 +53,24 @@ export async function POST(request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { name, email, phone, propertyInterest, budget, status, notes, source } = body;
-
-    if (!name || !email || !phone || !propertyInterest || !budget) {
+    // Rate limiting
+    const limitResult = rateLimit(session.user.id, session.user.role);
+    if (!limitResult.allowed) {
       return NextResponse.json(
-        { error: "Name, email, phone, property interest, and budget are required" },
-        { status: 400 }
+        { error: limitResult.message, retryAfter: limitResult.retryAfter },
+        { status: 429 }
       );
     }
+
+    const body = await request.json();
+
+    // Validation
+    const errors = validateLeadData(body);
+    if (errors.length > 0) {
+      return NextResponse.json({ error: errors[0], errors }, { status: 400 });
+    }
+
+    const { name, email, phone, propertyInterest, budget, status, notes, source } = body;
 
     await connectDB();
 
@@ -75,7 +88,6 @@ export async function POST(request) {
       score,
     });
 
-    // Log activity
     await ActivityLog.create({
       leadId: lead._id,
       action: "Lead Created",
@@ -84,7 +96,6 @@ export async function POST(request) {
       details: `Lead created with ${score} priority`,
     });
 
-    // Create notification for admins
     await Notification.create({
       title: "New Lead Created",
       message: `${lead.name} — ${score} Priority — PKR ${Number(budget).toLocaleString()}`,
@@ -92,7 +103,6 @@ export async function POST(request) {
       forRole: "admin",
     });
 
-    // Send email to admin
     try {
       const admins = await User.find({ role: "admin" }).select("email");
       for (const admin of admins) {
@@ -100,7 +110,6 @@ export async function POST(request) {
       }
     } catch (emailError) {
       console.error("Email send error:", emailError);
-      // Don't fail the request if email fails
     }
 
     return NextResponse.json({ lead }, { status: 201 });
