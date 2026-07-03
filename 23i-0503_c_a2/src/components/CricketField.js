@@ -16,11 +16,11 @@ function CricketField({ ballAnim, batAnim }) {
       ctx.fillStyle = '#87CEEB';
       ctx.fillRect(0, 0, canvas.width, 80);
 
-      // Outfield (green)
+      // Outfield 
       ctx.fillStyle = '#4CAF50';
       ctx.fillRect(0, 80, canvas.width, canvas.height - 80);
 
-      // Pitch (brown strip)
+      // Pitch 
       ctx.fillStyle = '#c8a96e';
       ctx.fillRect(canvas.width / 2 - 30, 80, 60, canvas.height - 80);
 
@@ -30,7 +30,7 @@ function CricketField({ ballAnim, batAnim }) {
         ctx.fillRect(canvas.width / 2 - 30 + 28 + offset, canvas.height - 70, 3, 30);
       });
 
-      // Batsman (simple stick figure)
+      // Batsman 
       const batsmanX = canvas.width / 2 - 60;
       const batsmanY = canvas.height - 60;
 
